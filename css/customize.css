@@ -451,3 +451,484 @@
   .tools-group .tools-cards__card,
   .tools-group .tools-cards__card > i { transition: none; }
 }
+
+/* ------------------------------------------------*/
+/* Portfolio: Project cards + Project modal  ->  dán vào customize.css (nạp SAU main.css) */
+/* ------------------------------------------------*/
+
+/* =============== CARD (ngoài lưới) =============== */
+.project-item {
+  display: flex;                 /* để các thẻ cùng hàng cao bằng nhau */
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--base);
+  border: 1px solid var(--stroke-elements);
+  border-radius: var(--_radius-xl);
+  transition: transform 0.4s var(--_animbezier),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.project-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.project-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.project-card__badge {
+  position: absolute;
+  top: 1.6rem;
+  left: 1.6rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 2rem;
+  background: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font: normal 600 1.3rem/1 var(--_font-default);
+}
+
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 2.4rem 2.6rem 2.8rem;
+}
+.project-card .rounded-tag {
+  height: 3rem;
+  font-size: 1.3rem;
+}
+.project-card__title {
+  margin: 1rem 0 0.8rem;
+  font: normal 700 2.2rem/1.25 var(--_font-accent);
+  color: var(--t-bright);
+}
+.project-card__text {
+  margin: 0 0 2.2rem;
+  font: normal 400 1.5rem/1.6 var(--_font-default);
+  color: var(--t-medium);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project-card__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+  font: normal 700 1.5rem/1 var(--_font-default);
+  color: var(--t-bright);
+}
+.project-card__more i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--stroke-controls);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* nút phủ kín cả thẻ: bấm đâu trong thẻ cũng mở dự án */
+.project-card__open {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+.project-card__open:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -4px;
+}
+
+.no-touch .project-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.55);
+}
+.no-touch .project-card:hover .project-card__media img {
+  transform: scale(1.06);
+}
+.no-touch .project-card:hover .project-card__more i {
+  transform: translate(3px, -3px);
+  color: var(--t-opp-bright);
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+}
+
+/* =============== MODAL (hộp chi tiết) =============== */
+html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
+
+.project-modal {
+  width: min(1100px, 94vw);
+  max-height: 92vh;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--stroke-elements);
+  border-radius: var(--_radius-xl);
+  background: var(--base);
+  color: var(--t-medium);
+}
+.project-modal::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.project-modal[open] {
+  animation: project-in 0.35s var(--_animbezier);
+}
+@keyframes project-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+}
+
+.project-modal__scroll {
+  max-height: 92vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* nút đóng: dính góc phải trên, đè lên ảnh hero */
+.project-modal__close {
+  position: sticky;
+  top: 1.6rem;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  margin: 1.6rem 1.6rem -6rem auto;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+  color: var(--t-opp-bright);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.project-modal__close:hover { transform: rotate(90deg); }
+
+.project-modal__hero {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-height: 46vh;
+  width: 100%;
+  overflow: hidden;
+}
+.project-modal__hero img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.project-modal__hero::after {          /* mờ dần xuống nền để nối với phần nội dung */
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 40%;
+  background: linear-gradient(to top, var(--base), transparent);
+}
+
+.project-modal__body {
+  padding: 1rem 2.4rem 3.2rem;
+}
+@media only screen and (min-width: 992px) {
+  .project-modal__body { padding: 1rem 5rem 4.6rem; }
+}
+
+.project-modal__head { margin-bottom: 2.8rem; }
+.project-modal__title {
+  margin: 1.2rem 0 1rem;
+  font: normal 700 3rem/1.15 var(--_font-accent);
+  background: linear-gradient(15deg, var(--t-accent) 0%, var(--t-secondary) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@media only screen and (min-width: 992px) {
+  .project-modal__title { font-size: 4.2rem; }
+}
+.project-modal__lead {
+  max-width: 78rem;
+  font: normal 400 1.7rem/1.6 var(--_font-default);
+  color: var(--t-medium);
+}
+
+/* thông tin nhanh: vai trò / thời gian / công cụ / trạng thái */
+.project-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin: 0 0 3.6rem;
+}
+@media only screen and (min-width: 768px) {
+  .project-meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.project-meta > div {
+  padding: 1.6rem 1.8rem;
+  border: 1px solid var(--stroke-elements);
+  border-radius: var(--_radius-m);
+  background: var(--base-tint);
+}
+.project-meta dt {
+  margin-bottom: 0.6rem;
+  font: normal 600 1.2rem/1 var(--_font-default);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--t-muted);
+}
+.project-meta dd {
+  margin: 0;
+  font: normal 700 1.5rem/1.35 var(--_font-default);
+  color: var(--t-bright);
+}
+
+/* 3 phần nội dung */
+.project-modal__cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.2rem;
+}
+@media only screen and (min-width: 992px) {
+  .project-modal__cols { grid-template-columns: 1fr 1fr; gap: 3.6rem 5rem; }
+  .project-section--wide { grid-column: 1 / -1; }
+}
+
+.project-section__title {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0 0 1.4rem;
+  font: normal 700 1.4rem/1.2 var(--_font-accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--t-bright);
+}
+.project-section__title::before {      /* gạch gradient nhỏ, cùng ngôn ngữ với dòng mô tả ở hero */
+  content: "";
+  width: 2.8rem;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+}
+.project-section p {
+  font: normal 400 1.6rem/1.7 var(--_font-default);
+  color: var(--t-medium);
+}
+
+.project-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.project-list li {
+  position: relative;
+  padding-left: 2.2rem;
+  margin-bottom: 1rem;
+  font: normal 400 1.6rem/1.6 var(--_font-default);
+  color: var(--t-medium);
+}
+.project-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+}
+
+.project-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.2rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+.project-metrics li {
+  padding: 2rem 2.2rem;
+  border-radius: var(--_radius-m);
+  background: var(--secondary-rgba);
+}
+.project-metrics strong {
+  display: block;
+  margin-bottom: 0.6rem;
+  font: normal 700 3.4rem/1 var(--_font-accent);
+  background: linear-gradient(15deg, var(--t-accent) 0%, var(--t-secondary) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.project-metrics span {
+  font: normal 400 1.4rem/1.4 var(--_font-default);
+  color: var(--t-medium);
+}
+
+/* hyperlink ra ngoài */
+.project-modal__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 3.6rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--stroke-elements);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-modal[open] { animation: none; }
+  .project-card, .project-card__media img, .project-card__more i { transition: none; }
+}
+
+
+/* ------------------------------------------------*/
+/* Portfolio TikTok: bổ sung cho customize-portfolio.css
+/* ------------------------------------------------*/
+
+/* Ảnh bìa dọc (kiểu video ngắn) thay cho 4:3. Đổi lại 1 / 1 nếu muốn vuông */
+.project-card__media {
+  aspect-ratio: 4 / 5;
+}
+
+/* ===== Danh sách video TikTok trong modal ===== */
+.video-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  max-width: 62rem;               /* thumbnail dọc không bị quá to trên màn hình rộng */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media only screen and (min-width: 576px) {
+  .video-links { gap: 1.6rem; }
+}
+
+.video-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.video-card__thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border: 1px solid var(--stroke-elements);
+  border-radius: var(--_radius-m);
+  background: var(--base-tint);
+}
+.video-card__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.video-card__thumb::after {       /* lớp tối nhẹ phía dưới để nhãn TikTok dễ đọc */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 55%);
+  pointer-events: none;
+}
+
+.video-card__play {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.18);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 2rem;
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.video-card__src {
+  position: absolute;
+  z-index: 2;
+  left: 0.8rem;
+  bottom: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font: normal 600 1.2rem/1 var(--_font-default);
+}
+
+.video-card__title {
+  display: -webkit-box;
+  margin-top: 1.1rem;
+  font: normal 700 1.3rem/1.35 var(--_font-default);
+  color: var(--t-bright);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.video-card__meta {
+  display: block;
+  margin-top: 0.4rem;
+  font: normal 400 1.2rem/1.3 var(--_font-default);
+  color: var(--t-muted);
+}
+@media only screen and (min-width: 576px) {
+  .video-card__title { font-size: 1.5rem; }
+  .video-card__meta  { font-size: 1.3rem; }
+}
+
+.no-touch .video-card:hover .video-card__thumb img {
+  transform: scale(1.07);
+}
+.no-touch .video-card:hover .video-card__play {
+  transform: translate(-50%, -50%) scale(1.12);
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+  color: #111;
+}
+.video-card:focus-visible .video-card__thumb {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-card__thumb img, .video-card__play { transition: none; }
+}
