@@ -54,7 +54,7 @@
 /* Template Backgrounds Start */
 /* ------------------------------------------------*/
 .image-background {
-  background-image: url("https://dummyimage.com/2560x1440/4d4d4d/636363");
+  background-image: url("./assets/imgs/cinematic-bg-bike.jpg");
 }
 
 /* ------------------------------------------------*/
@@ -3075,7 +3075,8 @@ form textarea:required:valid {
   overflow: hidden;
   -moz-border-radius: var(--_radius-l);
        border-radius: var(--_radius-l);
-  margin-bottom: 0.8rem;
+  margin-bottom: 2rem;
+  height: 70%;
 }
 
 .avatar__socials {

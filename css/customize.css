@@ -163,7 +163,6 @@
   overflow: hidden;
 }
 
-
 /* ------------------------------------------------*/
 /* Testimonials / Audience personas
 /* ------------------------------------------------*/
@@ -225,7 +224,11 @@
 }
 .persona-row__label i {
   font-size: 2.2rem;
-  background: linear-gradient(15deg, var(--t-accent) 0%, var(--t-secondary) 80%);
+  background: linear-gradient(
+    15deg,
+    var(--t-accent) 0%,
+    var(--t-secondary) 80%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -247,17 +250,16 @@
   background-color: var(--secondary-rgba);
 }
 
-
 /* ------------------------------------------------*/
 /* Tools & Gear  ->  dán vào customize.css
 /* ------------------------------------------------*/
 
 /* Màu neon theo từng nhóm (3 số R G B, để còn chỉnh độ trong suốt) */
 .tools-group {
-  --glow: 183 156 255;               /* 01 · BA: tím neon */
+  --glow: 183 156 255; /* 01 · BA: tím neon */
 }
 .tools-group--biker {
-  --glow: 125 255 107;               /* 02 · Biker: xanh lá Kawasaki */
+  --glow: 125 255 107; /* 02 · Biker: xanh lá Kawasaki */
 }
 /* Chế độ sáng: dùng màu đậm hơn để chữ/icon vẫn đọc được */
 :root[color-scheme="light"] .tools-group {
@@ -287,7 +289,9 @@
   background: linear-gradient(90deg, rgb(var(--glow) / 0.65), transparent);
 }
 @media only screen and (max-width: 575px) {
-  .tools-group__head::after { display: none; }
+  .tools-group__head::after {
+    display: none;
+  }
 }
 
 .tools-group__chip {
@@ -302,18 +306,22 @@
   color: rgb(var(--glow));
   border: 1px solid rgb(var(--glow) / 0.6);
   background: rgb(var(--glow) / 0.1);
-  box-shadow: 0 0 18px rgb(var(--glow) / 0.35),
-              inset 0 0 12px rgb(var(--glow) / 0.15);
+  box-shadow:
+    0 0 18px rgb(var(--glow) / 0.35),
+    inset 0 0 12px rgb(var(--glow) / 0.15);
   animation: tools-pulse 3.2s ease-in-out infinite;
 }
 @keyframes tools-pulse {
   50% {
-    box-shadow: 0 0 28px rgb(var(--glow) / 0.55),
-                inset 0 0 16px rgb(var(--glow) / 0.25);
+    box-shadow:
+      0 0 28px rgb(var(--glow) / 0.55),
+      inset 0 0 16px rgb(var(--glow) / 0.25);
   }
 }
 
-.tools-group__text { min-width: 0; }
+.tools-group__text {
+  min-width: 0;
+}
 .tools-group__no {
   display: block;
   margin-bottom: 0.5rem;
@@ -332,7 +340,9 @@
   color: var(--t-muted);
 }
 @media only screen and (min-width: 1200px) {
-  .tools-group__title { font-size: 2.2rem; }
+  .tools-group__title {
+    font-size: 2.2rem;
+  }
 }
 
 /* ===== Lưới thẻ (thay cho flex 20% của theme) ===== */
@@ -343,10 +353,15 @@
   padding: 0;
 }
 @media only screen and (min-width: 768px) {
-  .tools-group .tools-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.8rem; }
+  .tools-group .tools-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.8rem;
+  }
 }
 @media only screen and (min-width: 992px) {
-  .tools-group--biker .tools-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .tools-group--biker .tools-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 .tools-group .tools-cards__item {
   width: auto;
@@ -367,10 +382,15 @@
   border-radius: var(--_radius-l);
   border: 1px solid rgb(var(--glow) / 0.22);
   background-color: var(--base);
-  background-image: radial-gradient(120% 90% at 50% 0%, rgb(var(--glow) / 0.1) 0%, transparent 60%);
-  transition: transform 0.35s var(--_animbezier),
-              border-color 0.35s ease,
-              box-shadow 0.35s ease;
+  background-image: radial-gradient(
+    120% 90% at 50% 0%,
+    rgb(var(--glow) / 0.1) 0%,
+    transparent 60%
+  );
+  transition:
+    transform 0.35s var(--_animbezier),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 /* icon trong vòng tròn */
@@ -385,10 +405,11 @@
   color: rgb(var(--glow));
   background: rgb(var(--glow) / 0.12);
   border: 1px solid rgb(var(--glow) / 0.35);
-  transition: transform 0.35s var(--_animbezier),
-              background-color 0.35s ease,
-              color 0.35s ease,
-              box-shadow 0.35s ease;
+  transition:
+    transform 0.35s var(--_animbezier),
+    background-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .tools-group .tools-cards__caption {
@@ -414,7 +435,12 @@
   width: 0;
   height: 3px;
   transform: translateX(-50%);
-  background: linear-gradient(90deg, transparent, rgb(var(--glow)), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--glow)),
+    transparent
+  );
   box-shadow: 0 0 12px rgb(var(--glow));
   transition: width 0.4s ease;
 }
@@ -424,15 +450,16 @@
 .tools-group .tools-cards__card:active {
   transform: translateY(-8px);
   border-color: rgb(var(--glow) / 0.9);
-  box-shadow: 0 0 0 1px rgb(var(--glow) / 0.5),
-              0 0 18px rgb(var(--glow) / 0.45),
-              0 0 48px rgb(var(--glow) / 0.25),
-              inset 0 0 24px rgb(var(--glow) / 0.12);
+  box-shadow:
+    0 0 0 1px rgb(var(--glow) / 0.5),
+    0 0 18px rgb(var(--glow) / 0.45),
+    0 0 48px rgb(var(--glow) / 0.25),
+    inset 0 0 24px rgb(var(--glow) / 0.12);
 }
 .no-touch .tools-group .tools-cards__card:hover > i,
 .tools-group .tools-cards__card:active > i {
   transform: scale(1.1) rotate(-8deg);
-  color: #111;                                   /* icon tối trên nền neon đặc */
+  color: #111; /* icon tối trên nền neon đặc */
   background: rgb(var(--glow));
   box-shadow: 0 0 22px rgb(var(--glow) / 0.8);
 }
@@ -447,9 +474,13 @@
 
 /* Người dùng tắt hiệu ứng chuyển động */
 @media (prefers-reduced-motion: reduce) {
-  .tools-group__chip { animation: none; }
+  .tools-group__chip {
+    animation: none;
+  }
   .tools-group .tools-cards__card,
-  .tools-group .tools-cards__card > i { transition: none; }
+  .tools-group .tools-cards__card > i {
+    transition: none;
+  }
 }
 
 /* ------------------------------------------------*/
@@ -458,7 +489,7 @@
 
 /* =============== CARD (ngoài lưới) =============== */
 .project-item {
-  display: flex;                 /* để các thẻ cùng hàng cao bằng nhau */
+  display: flex; /* để các thẻ cùng hàng cao bằng nhau */
 }
 
 .project-card {
@@ -470,9 +501,10 @@
   background-color: var(--base);
   border: 1px solid var(--stroke-elements);
   border-radius: var(--_radius-xl);
-  transition: transform 0.4s var(--_animbezier),
-              border-color 0.3s ease,
-              box-shadow 0.3s ease;
+  transition:
+    transform 0.4s var(--_animbezier),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .project-card__media {
@@ -542,7 +574,11 @@
   height: 3.6rem;
   border-radius: 50%;
   border: 1px solid var(--stroke-controls);
-  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 /* nút phủ kín cả thẻ: bấm đâu trong thẻ cũng mở dự án */
@@ -579,7 +615,9 @@
 }
 
 /* =============== MODAL (hộp chi tiết) =============== */
-html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
+html.has-modal {
+  overflow: hidden;
+} /* khoá cuộn trang phía sau */
 
 .project-modal {
   width: min(1100px, 94vw);
@@ -601,7 +639,10 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   animation: project-in 0.35s var(--_animbezier);
 }
 @keyframes project-in {
-  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
 }
 
 .project-modal__scroll {
@@ -630,7 +671,9 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   cursor: pointer;
   transition: transform 0.3s ease;
 }
-.project-modal__close:hover { transform: rotate(90deg); }
+.project-modal__close:hover {
+  transform: rotate(90deg);
+}
 
 .project-modal__hero {
   position: relative;
@@ -645,7 +688,8 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   height: 100%;
   object-fit: cover;
 }
-.project-modal__hero::after {          /* mờ dần xuống nền để nối với phần nội dung */
+.project-modal__hero::after {
+  /* mờ dần xuống nền để nối với phần nội dung */
   content: "";
   position: absolute;
   inset: auto 0 0 0;
@@ -657,20 +701,30 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   padding: 1rem 2.4rem 3.2rem;
 }
 @media only screen and (min-width: 992px) {
-  .project-modal__body { padding: 1rem 5rem 4.6rem; }
+  .project-modal__body {
+    padding: 1rem 5rem 4.6rem;
+  }
 }
 
-.project-modal__head { margin-bottom: 2.8rem; }
+.project-modal__head {
+  margin-bottom: 2.8rem;
+}
 .project-modal__title {
   margin: 1.2rem 0 1rem;
   font: normal 700 3rem/1.15 var(--_font-accent);
-  background: linear-gradient(15deg, var(--t-accent) 0%, var(--t-secondary) 80%);
+  background: linear-gradient(
+    15deg,
+    var(--t-accent) 0%,
+    var(--t-secondary) 80%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 @media only screen and (min-width: 992px) {
-  .project-modal__title { font-size: 4.2rem; }
+  .project-modal__title {
+    font-size: 4.2rem;
+  }
 }
 .project-modal__lead {
   max-width: 78rem;
@@ -686,7 +740,9 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   margin: 0 0 3.6rem;
 }
 @media only screen and (min-width: 768px) {
-  .project-meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .project-meta {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 .project-meta > div {
   padding: 1.6rem 1.8rem;
@@ -714,8 +770,13 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   gap: 3.2rem;
 }
 @media only screen and (min-width: 992px) {
-  .project-modal__cols { grid-template-columns: 1fr 1fr; gap: 3.6rem 5rem; }
-  .project-section--wide { grid-column: 1 / -1; }
+  .project-modal__cols {
+    grid-template-columns: 1fr 1fr;
+    gap: 3.6rem 5rem;
+  }
+  .project-section--wide {
+    grid-column: 1 / -1;
+  }
 }
 
 .project-section__title {
@@ -728,7 +789,8 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   text-transform: uppercase;
   color: var(--t-bright);
 }
-.project-section__title::before {      /* gạch gradient nhỏ, cùng ngôn ngữ với dòng mô tả ở hero */
+.project-section__title::before {
+  /* gạch gradient nhỏ, cùng ngôn ngữ với dòng mô tả ở hero */
   content: "";
   width: 2.8rem;
   height: 3px;
@@ -780,7 +842,11 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   display: block;
   margin-bottom: 0.6rem;
   font: normal 700 3.4rem/1 var(--_font-accent);
-  background: linear-gradient(15deg, var(--t-accent) 0%, var(--t-secondary) 80%);
+  background: linear-gradient(
+    15deg,
+    var(--t-accent) 0%,
+    var(--t-secondary) 80%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -801,10 +867,15 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .project-modal[open] { animation: none; }
-  .project-card, .project-card__media img, .project-card__more i { transition: none; }
+  .project-modal[open] {
+    animation: none;
+  }
+  .project-card,
+  .project-card__media img,
+  .project-card__more i {
+    transition: none;
+  }
 }
-
 
 /* ------------------------------------------------*/
 /* Portfolio TikTok: bổ sung cho customize-portfolio.css
@@ -820,13 +891,15 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.2rem;
-  max-width: 62rem;               /* thumbnail dọc không bị quá to trên màn hình rộng */
+  max-width: 62rem; /* thumbnail dọc không bị quá to trên màn hình rộng */
   margin: 0;
   padding: 0;
   list-style: none;
 }
 @media only screen and (min-width: 576px) {
-  .video-links { gap: 1.6rem; }
+  .video-links {
+    gap: 1.6rem;
+  }
 }
 
 .video-card {
@@ -851,7 +924,8 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   object-fit: cover;
   transition: transform 0.6s ease;
 }
-.video-card__thumb::after {       /* lớp tối nhẹ phía dưới để nhãn TikTok dễ đọc */
+.video-card__thumb::after {
+  /* lớp tối nhẹ phía dưới để nhãn TikTok dễ đọc */
   content: "";
   position: absolute;
   inset: 0;
@@ -877,7 +951,11 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   backdrop-filter: blur(6px);
   color: #fff;
   font-size: 2rem;
-  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .video-card__src {
@@ -911,8 +989,12 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
   color: var(--t-muted);
 }
 @media only screen and (min-width: 576px) {
-  .video-card__title { font-size: 1.5rem; }
-  .video-card__meta  { font-size: 1.3rem; }
+  .video-card__title {
+    font-size: 1.5rem;
+  }
+  .video-card__meta {
+    font-size: 1.3rem;
+  }
 }
 
 .no-touch .video-card:hover .video-card__thumb img {
@@ -930,5 +1012,277 @@ html.has-modal { overflow: hidden; }   /* khoá cuộn trang phía sau */
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .video-card__thumb img, .video-card__play { transition: none; }
+  .video-card__thumb img,
+  .video-card__play {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------*/
+/* AVATAR SIDEBAR  ->  dán vào customize.css (nạp SAU main.css)
+   Ảnh tự co giãn theo chiều cao màn hình, lấp đầy chỗ trống, không để hở */
+/* ------------------------------------------------*/
+
+@media only screen and (min-width: 992px) {
+  /* khoảng cách tối thiểu giữa các khối (name+ảnh / chuyên môn / nơi ở / social+nút) */
+  .avatar__container {
+    gap: 2.4rem;
+  }
+
+  /* khối đầu tiên (tên + ảnh) nhận toàn bộ chiều cao còn dư */
+  .avatar__block:first-child {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  /* ảnh ăn hết phần dư của khối; không dùng height: 70% nữa */
+  .avatar__image {
+    position: relative;
+    flex: 1 1 0;
+    height: auto;
+    min-height: 16rem; /* màn hình thấp thì ảnh co lại nhưng không bé hơn mức này */
+    margin-bottom: 0;
+    /* max-height: 48rem;      <- bỏ comment nếu không muốn ảnh quá cao trên màn hình lớn */
+  }
+
+  /* ảnh phủ kín khung, cắt thay vì méo */
+  .avatar__image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* ưu tiên giữ phần đầu/mặt */
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .avatar__container {
+    gap: 3.2rem;
+  }
+}
+
+/* Căn giữa tên trong sidebar (mọi kích thước màn hình) */
+.avatar__block .avatar__logo {
+  justify-content: center; /* căn giữa theo chiều ngang */
+  padding-left: 0; /* bỏ khoảng chừa chỗ cho logo cũ */
+}
+.avatar__block .avatar__logo .logo__caption p {
+  text-align: center; /* nếu tên dài, xuống dòng vẫn căn giữa */
+}
+
+/* ------------------------------------------------*/
+/* GALLERY (ảnh cinematic): thẻ ngoài lưới + lightbox
+   -> dán vào customize.css (nạp SAU main.css), đặt SAU các rule gallery cũ */
+/* ------------------------------------------------*/
+
+:root {
+  --glow-a: 183 156 255; /* neon tím */
+  --glow-b: 255 122 198; /* neon hồng */
+}
+
+/* ===== Thẻ ngoài lưới: cùng 1 tỉ lệ, viền neon nhẹ ===== */
+.my-gallery {
+  --gallery-ratio: 4 / 3; /* đổi 1 / 1 (vuông) hoặc 4 / 5 (dọc) nếu muốn */
+}
+
+.my-gallery .gallery__link {
+  aspect-ratio: var(--gallery-ratio);
+  box-shadow:
+    0 0 0 1px rgb(var(--glow-a) / 0.28),
+    0 14px 44px -14px rgb(var(--glow-a) / 0.45);
+  transition:
+    transform 0.3s var(--_animbezier),
+    box-shadow 0.35s ease;
+}
+
+/* ảnh trong thẻ phủ kín khung, cắt thay vì méo */
+.my-gallery .gallery__link .gallery__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.no-touch .my-gallery .gallery__link:hover {
+  box-shadow:
+    0 0 0 1px rgb(var(--glow-a) / 0.75),
+    0 0 34px rgb(var(--glow-a) / 0.5),
+    0 0 90px rgb(var(--glow-b) / 0.28);
+}
+
+/* ===== Lightbox: nền có vầng sáng + ảnh bo góc phát sáng ===== */
+.pswp__bg {
+  background:
+    radial-gradient(
+      55% 50% at 50% 45%,
+      rgb(var(--glow-a) / 0.24) 0%,
+      transparent 72%
+    ),
+    radial-gradient(
+      40% 40% at 82% 85%,
+      rgb(var(--glow-b) / 0.16) 0%,
+      transparent 70%
+    ),
+    var(--per-base-tint);
+}
+
+.pswp__img {
+  border-radius: var(--_radius-l);
+  box-shadow:
+    0 0 0 1px rgb(var(--glow-a) / 0.4),
+    0 0 30px rgb(var(--glow-a) / 0.5),
+    0 0 100px rgb(var(--glow-b) / 0.3);
+}
+
+/* ------------------------------------------------*/
+/* CONTENT PILLARS  ->  dán vào customize.css (nạp SAU main.css) */
+/* ------------------------------------------------*/
+
+/* Màu neon cho từng trụ cột (3 số R G B) */
+.pillar {
+  --glow: 183 156 255;
+} /* 1 · tím */
+.pillar--2 {
+  --glow: 255 122 198;
+} /* 2 · hồng */
+.pillar--3 {
+  --glow: 125 255 107;
+} /* 3 · xanh Kawasaki */
+/* Chế độ sáng: màu đậm hơn để chữ số đọc được */
+:root[color-scheme="light"] .pillar {
+  --glow: 124 77 255;
+}
+:root[color-scheme="light"] .pillar--2 {
+  --glow: 219 39 119;
+}
+:root[color-scheme="light"] .pillar--3 {
+  --glow: 22 163 74;
+}
+
+/* ===== Khung ngoài: bỏ chiều cao cố định 520/620px của theme ===== */
+.pillar {
+  display: flex; /* 2 thẻ cùng hàng luôn cao bằng nhau */
+  height: auto;
+  overflow: visible; /* để thẻ nhấc lên khi hover không bị cắt */
+  cursor: default;
+}
+
+.pillar__card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  border-color: rgb(var(--glow) / 0.25);
+  background-image: radial-gradient(
+    120% 70% at 0% 0%,
+    rgb(var(--glow) / 0.1) 0%,
+    transparent 60%
+  );
+  transition:
+    transform 0.4s var(--_animbezier),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* ===== Phần chữ ===== */
+.pillar .pillar__body {
+  flex: 0 0 auto;
+  padding: 2.6rem 2.6rem 2.8rem;
+}
+@media only screen and (min-width: 1400px) {
+  .pillar .pillar__body {
+    padding: 4rem 4.2rem 4.4rem;
+  }
+}
+
+.pillar__pct {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.6rem;
+  font: normal 400 1.3rem/1 var(--_font-default);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--t-muted);
+}
+.pillar__pct strong {
+  font: normal 700 4.8rem/1 var(--_font-accent);
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: rgb(var(--glow));
+  text-shadow: 0 0 28px rgb(var(--glow) / 0.5);
+}
+
+.pillar .cards__title {
+  color: var(--t-bright);
+}
+.pillar .rounded-tag.tag-outline {
+  border-color: rgb(var(--glow) / 0.4);
+}
+
+/* ===== Khung hình: luôn phủ kín, không còn bị hụt hay bị ẩn ===== */
+.pillar__media {
+  position: relative;
+  flex: 1 1 auto; /* ăn hết chiều cao còn lại của thẻ */
+  min-height: 24rem;
+  overflow: hidden;
+  border-top: 1px solid rgb(var(--glow) / 0.2);
+  /* nền gradient: chưa có ảnh thì khung vẫn hiện, có ảnh thì ảnh đè lên */
+  background:
+    linear-gradient(135deg, rgb(var(--glow) / 0.28), rgb(var(--glow) / 0.06)),
+    var(--base-tint);
+}
+.pillar__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover; /* cắt vừa khung, không méo */
+  transition: transform 0.8s ease;
+}
+@media only screen and (min-width: 992px) {
+  .pillar__media {
+    min-height: 28rem;
+  }
+}
+
+/* ===== Trụ cột chính (60%): chữ trái, ảnh phải full chiều cao ===== */
+@media only screen and (min-width: 768px) {
+  .pillar--lead .pillar__card {
+    flex-direction: row;
+  }
+  .pillar--lead .pillar__body {
+    flex: 1 1 58%;
+  }
+  .pillar--lead .pillar__media {
+    flex: 0 0 42%;
+    min-height: 34rem;
+    border-top: 0;
+    border-left: 1px solid rgb(var(--glow) / 0.2);
+  }
+}
+
+/* ===== Hover: neon sáng lên ===== */
+.no-touch .pillar__card:hover {
+  transform: translateY(-6px);
+  border-color: rgb(var(--glow) / 0.8);
+  box-shadow:
+    0 0 0 1px rgb(var(--glow) / 0.4),
+    0 0 36px rgb(var(--glow) / 0.3),
+    0 24px 60px -24px rgb(var(--glow) / 0.5);
+}
+.no-touch .pillar__card:hover .pillar__media img {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pillar__card,
+  .pillar__media img {
+    transition: none;
+  }
 }
