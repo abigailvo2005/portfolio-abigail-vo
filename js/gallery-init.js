@@ -1,53 +1,43 @@
 // ------------------------------------------------
-// Author: dimsemenov
+// Author: dimsemenov (modified)
 // Author URI: https://github.com/dimsemenov
 // File name: gallery-init.js
 // https://codepen.io/dimsemenov/pen/ZYbPJM
+//
+// CUSTOM CHANGES:
+//  1. Each <figure> is now its own album: the cover link (a.gallery__link)
+//     plus any extra links (a.gallery__extra[hidden]) become the slides.
+//  2. Share menu only shows "Download image".
 // ------------------------------------------------
 
 var initPhotoSwipeFromDOM = function(gallerySelector) {
 
-    // parse slide data (url, title, size ...) from DOM elements
-    // (children of gallerySelector)
-    var parseThumbnailElements = function(el) {
-        var thumbElements = el.childNodes,
-            numNodes = thumbElements.length,
+    // parse slide data (url, title, size ...) from ONE <figure>
+    // every <a data-size="WxH"> inside the figure becomes a slide
+    var parseFigureElement = function(figureEl) {
+        var captionEl = figureEl.querySelector('figcaption'),
+            linkEls = figureEl.querySelectorAll('a[data-size]'),
             items = [],
-            figureEl,
             linkEl,
             size,
             item;
 
-        for(var i = 0; i < numNodes; i++) {
-
-            figureEl = thumbElements[i]; // <figure> element
-
-            // include only element nodes
-            if(figureEl.nodeType !== 1) {
-                continue;
-            }
-
-            linkEl = figureEl.children[0]; // <a> element
-
+        for(var i = 0; i < linkEls.length; i++) {
+            linkEl = linkEls[i];
             size = linkEl.getAttribute('data-size').split('x');
 
             // create slide object
             item = {
                 src: linkEl.getAttribute('href'),
                 w: parseInt(size[0], 10),
-                h: parseInt(size[1], 10)
+                h: parseInt(size[1], 10),
+                // thumbnail shown while the full image loads
+                msrc: linkEl.getAttribute('data-image')
             };
 
-
-
-            if(figureEl.children.length > 1) {
-                // <figcaption> content
-                item.title = figureEl.children[1].innerHTML;
-            }
-
-            if(linkEl.children.length > 0) {
-                // <img> thumbnail element, retrieving thumbnail url
-                item.msrc = linkEl.children[0].getAttribute('src');
+            // same <figcaption> content for every slide of the album
+            if(captionEl) {
+                item.title = captionEl.innerHTML;
             }
 
             item.el = figureEl; // save link to element for getThumbBoundsFn
@@ -65,7 +55,6 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     // triggers when user clicks on thumbnail
     var onThumbnailsClick = function(e) {
         e = e || window.event;
-        e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
         var eTarget = e.target || e.srcElement;
 
@@ -78,32 +67,10 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             return;
         }
 
-        // find index of clicked item by looping through all child nodes
-        // alternatively, you may define index via data- attribute
-        var clickedGallery = clickedListItem.parentNode,
-            childNodes = clickedListItem.parentNode.childNodes,
-            numChildNodes = childNodes.length,
-            nodeIndex = 0,
-            index;
+        e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
-        for (var i = 0; i < numChildNodes; i++) {
-            if(childNodes[i].nodeType !== 1) {
-                continue;
-            }
-
-            if(childNodes[i] === clickedListItem) {
-                index = nodeIndex;
-                break;
-            }
-            nodeIndex++;
-        }
-
-
-
-        if(index >= 0) {
-            // open PhotoSwipe if valid index found
-            openPhotoSwipe( index, clickedGallery );
-        }
+        // always start from the first (cover) image of the album
+        openPhotoSwipe( 0, clickedListItem );
         return false;
     };
 
@@ -135,25 +102,36 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         return params;
     };
 
-    var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+    // figureEl = the album (one <figure>) to open
+    var openPhotoSwipe = function(index, figureEl, disableAnimation, fromURL) {
         var pswpElement = document.querySelectorAll('.pswp')[0],
             gallery,
             options,
             items;
 
-        items = parseThumbnailElements(galleryElement);
+        items = parseFigureElement(figureEl);
 
         // define options (if needed)
         options = {
 
             showHideOpacity: true,
 
-            // define gallery index (for URL)
-            galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+            // gallery index (for URL) - now one uid per <figure>
+            galleryUID: figureEl.getAttribute('data-pswp-uid'),
+
+            // Share menu: only "Download image"
+            shareButtons: [
+                {
+                    id: 'download',
+                    label: 'Download image',
+                    url: '{{raw_image_url}}',
+                    download: true
+                }
+            ],
 
             getThumbBoundsFn: function(index) {
-                // See Options -> getThumbBoundsFn section of documentation for more info
-                var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+                // zoom to/from the cover image of the album
+                var thumbnail = figureEl.getElementsByTagName('img')[0], // find thumbnail
                     pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
                     rect = thumbnail.getBoundingClientRect();
 
@@ -164,25 +142,14 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
         // PhotoSwipe opened from URL
         if(fromURL) {
-            if(options.galleryPIDs) {
-                // parse real index when custom PIDs are used
-                // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
-                for(var j = 0; j < items.length; j++) {
-                    if(items[j].pid == index) {
-                        options.index = j;
-                        break;
-                    }
-                }
-            } else {
-                // in URL indexes start from 1
-                options.index = parseInt(index, 10) - 1;
-            }
+            // in URL indexes start from 1
+            options.index = parseInt(index, 10) - 1;
         } else {
             options.index = parseInt(index, 10);
         }
 
         // exit if index not found
-        if( isNaN(options.index) ) {
+        if( isNaN(options.index) || options.index < 0 || options.index >= items.length ) {
             return;
         }
 
@@ -196,17 +163,28 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     };
 
     // loop through all gallery elements and bind events
-    var galleryElements = document.querySelectorAll( gallerySelector );
+    var galleryElements = document.querySelectorAll( gallerySelector ),
+        uid = 0;
 
     for(var i = 0, l = galleryElements.length; i < l; i++) {
-        galleryElements[i].setAttribute('data-pswp-uid', i+1);
+        // give every <figure> (album) its own uid, counting across all galleries
+        var figures = galleryElements[i].querySelectorAll('figure');
+        for(var f = 0; f < figures.length; f++) {
+            uid++;
+            figures[f].setAttribute('data-pswp-uid', uid);
+        }
         galleryElements[i].onclick = onThumbnailsClick;
     }
 
-    // Parse URL and open gallery if it contains #&pid=3&gid=1
+    // Parse URL and open album if it contains #&pid=3&gid=1
     var hashData = photoswipeParseHash();
     if(hashData.pid && hashData.gid) {
-        openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
+        var figureFromUrl = document.querySelector(
+            gallerySelector + ' figure[data-pswp-uid="' + hashData.gid + '"]'
+        );
+        if(figureFromUrl) {
+            openPhotoSwipe( hashData.pid, figureFromUrl, true, true );
+        }
     }
 };
 
