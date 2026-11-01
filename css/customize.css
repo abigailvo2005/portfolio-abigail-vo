@@ -162,3 +162,292 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+
+/* ------------------------------------------------*/
+/* Testimonials / Audience personas
+/* ------------------------------------------------*/
+
+/* Avatar: icon trắng/đen trên nền gradient của theme (thay cho style inline) */
+.testimonials-card .tauthor__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+  color: var(--t-per-bright-dark);
+  font-size: 2.8rem;
+}
+@media only screen and (min-width: 768px) {
+  .testimonials-card .tauthor__avatar {
+    font-size: 4.2rem;
+  }
+}
+
+/* Tag: cho phép xuống dòng trên màn hình nhỏ */
+.testimonials-card .card__tags {
+  flex-wrap: wrap;
+  gap: 0.6rem 0.8rem;
+  margin-top: 1rem;
+}
+
+/* Khung mô tả: 3 ô thay cho 1 đoạn */
+.testimonials-card .testimonials-card__descr {
+  max-width: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+}
+@media only screen and (min-width: 992px) {
+  .testimonials-card .testimonials-card__descr {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Mỗi ô: Đặc điểm / Lý do theo dõi / Tiềm năng chuyển đổi */
+.persona-row {
+  padding: 2.2rem 2.4rem;
+  border: 1px solid var(--stroke-elements);
+  border-radius: var(--_radius-m);
+  background-color: var(--base-tint);
+}
+
+.persona-row__label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  font: normal 700 1.3rem/1.2 var(--_font-accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--t-bright);
+}
+.persona-row__label i {
+  font-size: 2.2rem;
+  background: linear-gradient(15deg, var(--t-accent) 0%, var(--t-secondary) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.persona-row p {
+  font: normal 400 1.5rem/1.6 var(--_font-default);
+  color: var(--t-medium);
+}
+@media only screen and (min-width: 1400px) {
+  .persona-row p {
+    font-size: 1.6rem;
+  }
+}
+
+/* Ô quan trọng nhất (chuyển đổi): nền tím nhạt của theme cho nổi bật */
+.persona-row--key {
+  border-color: transparent;
+  background-color: var(--secondary-rgba);
+}
+
+
+/* ------------------------------------------------*/
+/* Tools & Gear  ->  dán vào customize.css
+/* ------------------------------------------------*/
+
+/* Màu neon theo từng nhóm (3 số R G B, để còn chỉnh độ trong suốt) */
+.tools-group {
+  --glow: 183 156 255;               /* 01 · BA: tím neon */
+}
+.tools-group--biker {
+  --glow: 125 255 107;               /* 02 · Biker: xanh lá Kawasaki */
+}
+/* Chế độ sáng: dùng màu đậm hơn để chữ/icon vẫn đọc được */
+:root[color-scheme="light"] .tools-group {
+  --glow: 124 77 255;
+}
+:root[color-scheme="light"] .tools-group--biker {
+  --glow: 22 163 74;
+}
+
+.tools-group + .tools-group {
+  margin-top: 7rem;
+}
+
+/* ===== Tiêu đề từng nhóm ===== */
+.tools-group__head {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin-bottom: 2.4rem;
+}
+/* đường kẻ gradient kéo dài sang phải, tách nhóm rõ ràng */
+.tools-group__head::after {
+  content: "";
+  flex: 1 1 3rem;
+  height: 1px;
+  margin-left: 1rem;
+  background: linear-gradient(90deg, rgb(var(--glow) / 0.65), transparent);
+}
+@media only screen and (max-width: 575px) {
+  .tools-group__head::after { display: none; }
+}
+
+.tools-group__chip {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.2rem;
+  height: 5.2rem;
+  border-radius: 1.6rem;
+  font-size: 2.6rem;
+  color: rgb(var(--glow));
+  border: 1px solid rgb(var(--glow) / 0.6);
+  background: rgb(var(--glow) / 0.1);
+  box-shadow: 0 0 18px rgb(var(--glow) / 0.35),
+              inset 0 0 12px rgb(var(--glow) / 0.15);
+  animation: tools-pulse 3.2s ease-in-out infinite;
+}
+@keyframes tools-pulse {
+  50% {
+    box-shadow: 0 0 28px rgb(var(--glow) / 0.55),
+                inset 0 0 16px rgb(var(--glow) / 0.25);
+  }
+}
+
+.tools-group__text { min-width: 0; }
+.tools-group__no {
+  display: block;
+  margin-bottom: 0.5rem;
+  font: normal 700 1.2rem/1 var(--_font-accent);
+  letter-spacing: 0.2em;
+  color: rgb(var(--glow));
+}
+.tools-group__title {
+  margin: 0;
+  font: normal 700 1.8rem/1.2 var(--_font-accent);
+  color: var(--t-bright);
+}
+.tools-group__sub {
+  margin: 0.4rem 0 0;
+  font: normal 400 1.4rem/1.4 var(--_font-default);
+  color: var(--t-muted);
+}
+@media only screen and (min-width: 1200px) {
+  .tools-group__title { font-size: 2.2rem; }
+}
+
+/* ===== Lưới thẻ (thay cho flex 20% của theme) ===== */
+.tools-group .tools-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+  padding: 0;
+}
+@media only screen and (min-width: 768px) {
+  .tools-group .tools-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.8rem; }
+}
+@media only screen and (min-width: 992px) {
+  .tools-group--biker .tools-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.tools-group .tools-cards__item {
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+/* ===== Thẻ ===== */
+.tools-group .tools-cards__card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: 2.6rem 1.6rem;
+  border-radius: var(--_radius-l);
+  border: 1px solid rgb(var(--glow) / 0.22);
+  background-color: var(--base);
+  background-image: radial-gradient(120% 90% at 50% 0%, rgb(var(--glow) / 0.1) 0%, transparent 60%);
+  transition: transform 0.35s var(--_animbezier),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+}
+
+/* icon trong vòng tròn */
+.tools-group .tools-cards__card > i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  font-size: 2.6rem;
+  color: rgb(var(--glow));
+  background: rgb(var(--glow) / 0.12);
+  border: 1px solid rgb(var(--glow) / 0.35);
+  transition: transform 0.35s var(--_animbezier),
+              background-color 0.35s ease,
+              color 0.35s ease,
+              box-shadow 0.35s ease;
+}
+
+.tools-group .tools-cards__caption {
+  margin: 0;
+  line-height: 1.25;
+  text-align: center;
+  transition: text-shadow 0.35s ease;
+}
+.tools-group .tools-cards__caption small {
+  margin-top: 0.6rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--t-muted);
+}
+
+/* vạch sáng chạy ra từ giữa đáy thẻ */
+.tools-group .tools-cards__card::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgb(var(--glow)), transparent);
+  box-shadow: 0 0 12px rgb(var(--glow));
+  transition: width 0.4s ease;
+}
+
+/* ===== Hover = neon sáng lên ===== */
+.no-touch .tools-group .tools-cards__card:hover,
+.tools-group .tools-cards__card:active {
+  transform: translateY(-8px);
+  border-color: rgb(var(--glow) / 0.9);
+  box-shadow: 0 0 0 1px rgb(var(--glow) / 0.5),
+              0 0 18px rgb(var(--glow) / 0.45),
+              0 0 48px rgb(var(--glow) / 0.25),
+              inset 0 0 24px rgb(var(--glow) / 0.12);
+}
+.no-touch .tools-group .tools-cards__card:hover > i,
+.tools-group .tools-cards__card:active > i {
+  transform: scale(1.1) rotate(-8deg);
+  color: #111;                                   /* icon tối trên nền neon đặc */
+  background: rgb(var(--glow));
+  box-shadow: 0 0 22px rgb(var(--glow) / 0.8);
+}
+.no-touch .tools-group .tools-cards__card:hover .tools-cards__caption,
+.tools-group .tools-cards__card:active .tools-cards__caption {
+  text-shadow: 0 0 14px rgb(var(--glow) / 0.7);
+}
+.no-touch .tools-group .tools-cards__card:hover::after,
+.tools-group .tools-cards__card:active::after {
+  width: 70%;
+}
+
+/* Người dùng tắt hiệu ứng chuyển động */
+@media (prefers-reduced-motion: reduce) {
+  .tools-group__chip { animation: none; }
+  .tools-group .tools-cards__card,
+  .tools-group .tools-cards__card > i { transition: none; }
+}
