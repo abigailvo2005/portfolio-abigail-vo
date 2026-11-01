@@ -1,0 +1,102 @@
+/* VIDEO BACKGROUND CSS */
+
+.video-background {
+  position: fixed; /* giống như nền ảnh */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* nằm dưới nội dung */
+}
+
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* phủ kín, không bị méo */
+}
+
+.video-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.85) 0%,
+    /* bên trái: rất tối, chữ nổi bật */ rgba(0, 0, 0, 0.55) 40%,
+    /* giữa: tối vừa */ rgba(0, 0, 0, 0.1) 100%
+      /* bên phải: gần như trong suốt, thấy rõ xe */
+  );
+  pointer-events: none;
+}
+
+/* ROTATING DESCRIPTION */
+.headline__rotator {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 12px 0 24px;
+}
+
+.rotator__words {
+  display: inline-grid; /* tất cả cụm xếp chồng lên nhau tại cùng 1 ô */
+  overflow: hidden; /* cắt phần chữ trượt ra ngoài */
+}
+
+.rotator__word {
+  grid-area: 1 / 1; /* mọi cụm nằm chung 1 vị trí */
+  opacity: 0;
+  transform: translateY(100%); /* mặc định: nằm chờ bên dưới */
+  transition:
+    transform 0.8s ease,
+    opacity 0.6s ease;
+}
+
+.rotator__word.is-active {
+  opacity: 1;
+  transform: translateY(0); /* đang hiển thị */
+}
+
+.rotator__word.is-leaving {
+  opacity: 0;
+  transform: translateY(-100%); /* trượt lên và biến mất */
+}
+
+/* Tôn trọng người dùng tắt hiệu ứng chuyển động */
+@media (prefers-reduced-motion: reduce) {
+  .rotator__word {
+    transition: none;
+  }
+}
+
+.headline__rotator {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;                         /* khoảng cách giữa gạch và chữ */
+  margin: 2rem 0 0;
+  font: normal 600 1.8rem/1.5 var(--_font-default);
+  color: var(--t-bright);              /* tự đổi theo light/dark */
+}
+
+/* gạch gradient nhỏ phía trước, cùng màu với h1 */
+.headline__rotator::before {
+  content: "";
+  flex: none;
+  width: 3.2rem;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+}
+
+@media only screen and (min-width: 768px) {
+  .headline__rotator { font-size: 2rem; margin-top: 2.4rem; }
+}
+@media only screen and (min-width: 1200px) {
+  .headline__rotator { font-size: 2.2rem; }
+}
+@media only screen and (min-width: 1400px) {
+  .headline__rotator { font-size: 2.4rem; }
+}
+@media only screen and (min-width: 1600px) {
+  .headline__rotator { font-size: 2.8rem; gap: 1.8rem; }
+  .headline__rotator::before { width: 4rem; }
+}

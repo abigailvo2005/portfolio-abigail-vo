@@ -43,6 +43,10 @@
 /* ------------------------------------------------*/
 /* Syne font */
 @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 /* ------------------------------------------------*/
 /* Fonts End */
 /* ------------------------------------------------*/
@@ -61,8 +65,8 @@
 /* ------------------------------------------------*/
 :root {
   --_size: 1.6rem;
-  --_font-default: "Syne", sans-serif;
-  --_font-accent: "Syne", sans-serif;
+  --_font-default: "Plus Jakarta Sans", sans-serif;
+  --_font-accent: "Plus Jakarta Sans", sans-serif;
   --_radius-s: 1.5rem;
   --_radius-m: 2.2rem;
   --_radius-l: 3rem;
@@ -2596,7 +2600,7 @@ form textarea:required:valid {
   margin-bottom: 1.4rem;
 }
 .content__block.block-large {
-  margin-bottom: 11rem;
+  margin-bottom: 6rem;
 }
 .content__block.block-grid-large {
   margin-bottom: 10rem;
@@ -2995,7 +2999,7 @@ form textarea:required:valid {
 
 .avatar__block {
   position: relative;
-  margin-bottom: 3rem;
+  margin-bottom: 10%;
 }
 .avatar__block:first-child {
   margin-bottom: 3.6rem;
@@ -3003,6 +3007,13 @@ form textarea:required:valid {
 .avatar__block:last-child {
   margin-bottom: 0;
 }
+
+@media only screen and (min-width: 320px) {
+  .avatar__logo {
+  padding-left: 13%;
+}
+}
+
 @media only screen and (min-width: 768px) {
   .avatar__block {
     margin-bottom: 4rem;
@@ -3010,7 +3021,10 @@ form textarea:required:valid {
   .avatar__block:first-child {
     margin-bottom: 4.4rem;
   }
+
+  padding-left: 50%;
 }
+
 @media only screen and (min-width: 992px) {
   .avatar__block {
     margin-bottom: 0;
@@ -3021,7 +3035,7 @@ form textarea:required:valid {
 }
 
 .avatar__logo {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 @media only screen and (min-width: 1400px) {
   .avatar__logo {
@@ -3044,8 +3058,8 @@ form textarea:required:valid {
   }
 }
 
-.logo__caption {
-  padding-left: 2rem;
+.avatar__logo {
+  padding-left: 20%;
 }
 .logo__caption p {
   font: normal 700 2.8rem/1.06 var(--_font-accent);
